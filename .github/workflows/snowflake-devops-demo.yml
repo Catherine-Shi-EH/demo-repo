@@ -32,10 +32,6 @@ jobs:
           SF_DATABASE:  ${{ secrets.SF_DATABASE }}
           SF_SCHEMA:    ${{ secrets.SF_SCHEMA }}
         run: |
-          mkdir -p .secrets
-          echo "$SF_PRIVATE_KEY_P8_B64" | base64 -d > .secrets/rsa_key.p8
-          chmod 600 .secrets/rsa_key.p8
-      
           schemachange deploy \
             --connections-file-path ./connections.toml \
             --connection-name connections \
