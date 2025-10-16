@@ -1,3 +1,4 @@
+[connections]
 account   = "$SF_ACCOUNT"
 user      = "$SF_USERNAME"
 role      = "$SF_ROLE"
