@@ -1,10 +1,10 @@
 [connections.dev]
-account   = "${{ env.SF_ACCOUNT }}"
-user      = "${{ env.SF_USERNAME }}"
-role      = "${{ env.SF_ROLE }}"
-warehouse = "${{ env.SF_WAREHOUSE }}"
-database  = "${{ env.SF_DATABASE }}"
-schema    = "${{ env.SF_SCHEMA }}"
+account   = "$SF_ACCOUNT"
+user      = "$SF_USERNAME"
+role      = "$SF_ROLE"
+warehouse = "$SF_WAREHOUSE"
+database  = "$SF_DATABASE"
+schema    = "$SF_SCHEMA"
 
 authenticator    = "snowflake_jwt"
 private_key_file = ".secrets/rsa_key.p8"
