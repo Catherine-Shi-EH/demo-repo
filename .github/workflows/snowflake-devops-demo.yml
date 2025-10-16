@@ -38,7 +38,7 @@ jobs:
       
           schemachange deploy \
             --connections-file-path ./connections.toml \
-            --connection-name dev \
+            --connection-name connections \
             -f ./migrations \
             -c "$SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY" \
             --create-change-history-table \
