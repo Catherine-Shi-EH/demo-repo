@@ -47,8 +47,8 @@ jobs:
             -w "$SF_WAREHOUSE" \
             -d "$SF_DATABASE" \
             -s "$SF_SCHEMA" \
+            --connections-file-path ./connections.toml \
+            --connection-name dev \
             -c "$SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY" \
             --create-change-history-table \
-            --authenticator snowflake_jwt \
-            --private-key-path .secrets/rsa_key.p8 \
             -v
