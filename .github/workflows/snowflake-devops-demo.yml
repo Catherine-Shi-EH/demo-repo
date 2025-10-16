@@ -22,13 +22,6 @@ jobs:
       - name: Install schemachange
         run: pip install --upgrade pip schemachange
 
-      # 🔐 Recreate private key file from secret
-      - name: Write private key
-        run: |
-          mkdir -p .secrets
-          echo "${{ secrets.SF_PRIVATE_KEY_P8_B64 }}" | base64 -d > .secrets/rsa_key.p8
-          chmod 600 .secrets/rsa_key.p8
-
       # 🚀 Run schemachange with key-pair authentication
       - name: Run schemachange (key-pair auth)
         env:
@@ -39,16 +32,14 @@ jobs:
           SF_DATABASE:  ${{ secrets.SF_DATABASE }}
           SF_SCHEMA:    ${{ secrets.SF_SCHEMA }}
         run: |
-          schemachange \
-            -f "$GITHUB_WORKSPACE/migrations" \
-            -a "$SF_ACCOUNT" \
-            -u "$SF_USERNAME" \
-            -r "$SF_ROLE" \
-            -w "$SF_WAREHOUSE" \
-            -d "$SF_DATABASE" \
-            -s "$SF_SCHEMA" \
+          mkdir -p .secrets
+          echo "$SF_PRIVATE_KEY_P8_B64" | base64 -d > .secrets/rsa_key.p8
+          chmod 600 .secrets/rsa_key.p8
+      
+          schemachange deploy \
             --connections-file-path ./connections.toml \
-            --connections-name dev \
+            --connection-name dev \
+            -f ./migrations \
             -c "$SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY" \
             --create-change-history-table \
             -v
